@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import { ConfigProvider } from 'antd';
 import { lightTheme, darkTheme } from '../theme';
 
-interface ThemeContextType {
+export interface ThemeContextType {
   isDarkMode: boolean;
   toggleTheme: () => void;
 }
@@ -17,20 +17,28 @@ export const useTheme = () => {
   return context;
 };
 
-export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({
+  children,
+}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemPrefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     setIsDarkMode(systemPrefersDark);
 
     const themeChangeListener = (e: MediaQueryListEvent) => {
       setIsDarkMode(e.matches);
     };
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', themeChangeListener);
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', themeChangeListener);
     return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', themeChangeListener);
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .removeEventListener('change', themeChangeListener);
     };
   }, []);
 
