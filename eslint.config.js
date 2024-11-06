@@ -33,7 +33,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': 'off',
-      'prrettie/prettier': 'error', // Displays Prettier issues as ESLint errors
+      'prettier/prettier': 'error', // Displays Prettier issues as ESLint errors
     },
   }
 );

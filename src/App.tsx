@@ -10,6 +10,7 @@ import {
   InputNumber,
 } from 'antd';
 import ThemeSwitch from './components/ThemeSwitch';
+import PaymentForm from './components/PaymentForm';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -43,6 +44,9 @@ function App() {
     <Row justify="center" className="form-container">
       <Col xs={24} sm={16} md={12} lg={8}>
         <ThemeSwitch />
+        <PaymentForm />
+      </Col>
+      <Col xs={24} sm={16} md={12} lg={8}>
         <Title level={3} className="form-title">
           User Information
         </Title>
