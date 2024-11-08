@@ -5,22 +5,23 @@ import { PayeeAccount } from 'app/common/AppInput/PayeeAccount';
 import { Purpose } from 'app/common/AppInput/Purpose';
 import { Payee } from 'app/common/AppInput/Payee';
 import Form from 'app/common/Form';
+import { PaymentForm as PaymentFormType } from 'types';
 import './styles.css';
-
-interface FormData {
-  payerAccount: string;
-  amount: number;
-  payeeAccount: string;
-  purpose: string;
-}
+import { useSubmitPaymentMutation } from 'app/slice/query';
 
 const PaymentForm: React.FC = () => {
-  const onSubmit = (data: FormData) => {
-    console.log('Form Data:', data);
+  const [submit, { isLoading }] = useSubmitPaymentMutation();
+
+  const onSubmit = async (data: PaymentFormType) => {
+    await submit(data);
   };
 
   return (
-    <Form<FormData> onSubmit={onSubmit} title="Payment">
+    <Form<PaymentFormType>
+      onSubmit={onSubmit}
+      title="Payment"
+      isLoading={isLoading}
+    >
       <PayerAccount />
       <Amount />
       <PayeeAccount />

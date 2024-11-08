@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, WithSlice } from '@reduxjs/toolkit';
 import { rootReducer } from 'store/configureStore';
 import { AppState } from './types';
-import { Language } from 'types';
+import { Language, PaymentForm } from 'types';
 
 export const initialState: AppState = {
   payerAccounts: [
@@ -20,8 +20,14 @@ export const initialState: AppState = {
       id: '3',
       balance: -5.87,
     },
+    {
+      iban: 'LT307300010172619162',
+      id: '4',
+      balance: 50000,
+    },
   ],
   language: Language.EN,
+  error: null,
 };
 
 const slice = createSlice({
@@ -30,6 +36,21 @@ const slice = createSlice({
   reducers: {
     selectlanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
+    },
+    paymentError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    paymentSuccess: (state, action: PayloadAction<PaymentForm>) => {
+      const payerAccount = state.payerAccounts.find(
+        (account) => account.id === action.payload.payerAccount
+      );
+
+      if (payerAccount) {
+        payerAccount.balance -= action.payload.amount;
+      }
+    },
+    resetError: (state) => {
+      state.error = null;
     },
   },
 });

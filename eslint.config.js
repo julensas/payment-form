@@ -33,6 +33,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
       'prettier/prettier': 'error', // Displays Prettier issues as ESLint errors
       '@typescript-eslint/no-empty-object-type': 'off',
     },

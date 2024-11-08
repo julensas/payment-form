@@ -15,6 +15,8 @@ export const selectLanguage = createSelector(
   (state) => state.language
 );
 
+export const selectError = createSelector([selectApp], (state) => state.error);
+
 export const selectBalanceByAccountId = (id: string | undefined) =>
   createSelector([selectApp], (state) => {
     if (!id) {
