@@ -6,15 +6,12 @@ import {
   FieldValues,
   UseFormProps,
 } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ZodSchema } from 'zod';
 
 const { Title } = Typography;
 
 interface FormProps<T extends FieldValues> extends UseFormProps<T> {
   onSubmit: (formData: T) => void;
   children: React.ReactNode;
-  schema: ZodSchema<T>;
   title?: string;
   submitLabel?: string;
 }
@@ -23,19 +20,18 @@ const Form = <T extends FieldValues>({
   onSubmit,
   defaultValues,
   children,
-  schema,
   title,
   submitLabel,
 }: FormProps<T>) => {
   const methods = useForm<T>({
     defaultValues,
     mode: 'all',
-    resolver: zodResolver(schema),
   });
 
   return (
     <FormProvider {...methods}>
       <AntdForm
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onFinish={methods.handleSubmit(onSubmit)}
         layout="vertical"
         className="form"
@@ -47,7 +43,7 @@ const Form = <T extends FieldValues>({
         )}
         {children}
         <AntdForm.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
             {submitLabel ?? 'Submit'}
           </Button>
         </AntdForm.Item>

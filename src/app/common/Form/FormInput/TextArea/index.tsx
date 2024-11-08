@@ -1,15 +1,16 @@
 import React from 'react';
 import { Input } from 'antd';
-import FormController from '../FormController';
-import { FormInputProps } from './types';
+import FormController from '../../FormController';
+import { FormInputProps } from '../types';
 
 type TextAreaProps = React.ComponentProps<typeof Input.TextArea> &
   FormInputProps;
 
-const TextArea: React.FC<TextAreaProps> = ({
+export const TextArea: React.FC<TextAreaProps> = ({
   name,
   label,
   required = false,
+  rules,
   ...props
 }) => {
   return (
@@ -17,6 +18,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       name={name}
       label={label}
       required={required}
+      rules={rules}
       render={({ field, isInvalid }) => (
         <Input.TextArea
           {...field}
@@ -27,5 +29,3 @@ const TextArea: React.FC<TextAreaProps> = ({
     />
   );
 };
-
-export default TextArea;

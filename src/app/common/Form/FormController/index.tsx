@@ -3,12 +3,14 @@ import React from 'react';
 import {
   useController,
   ControllerRenderProps,
+  UseControllerProps,
   FieldValues,
   Path,
 } from 'react-hook-form';
 import { Form } from 'antd';
 
-interface FormControllerProps<TFieldValues extends FieldValues> {
+interface FormControllerProps<TFieldValues extends FieldValues>
+  extends UseControllerProps<TFieldValues> {
   name: Path<TFieldValues>;
   label?: string;
   required?: boolean;
@@ -24,12 +26,14 @@ const FormController = <TFieldValues extends FieldValues>({
   label,
   render,
   required,
+  rules,
 }: FormControllerProps<TFieldValues>) => {
   const {
     field,
     fieldState: { invalid, error },
-  } = useController<TFieldValues>({
+  } = useController({
     name,
+    rules,
   });
 
   return (

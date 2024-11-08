@@ -1,18 +1,20 @@
 import React from 'react';
 import { InputNumber, InputNumberProps } from 'antd';
-import FormController from '../FormController';
-import { FormInputProps } from './types';
+import FormController from '../../FormController';
+import { FormInputProps } from '../types';
 
-const Number: React.FC<InputNumberProps & FormInputProps> = ({
+export const Number: React.FC<InputNumberProps & FormInputProps> = ({
   name,
   label,
   required = false,
+  rules,
   ...props
 }) => {
   return (
     <FormController
       name={name}
       label={label}
+      rules={rules}
       required={required}
       render={({ field, isInvalid }) => (
         <InputNumber
@@ -25,5 +27,3 @@ const Number: React.FC<InputNumberProps & FormInputProps> = ({
     />
   );
 };
-
-export default Number;

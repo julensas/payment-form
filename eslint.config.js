@@ -34,6 +34,7 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': 'off',
       'prettier/prettier': 'error', // Displays Prettier issues as ESLint errors
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
   }
 );

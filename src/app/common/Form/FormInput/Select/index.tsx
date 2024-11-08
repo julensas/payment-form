@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select as AntSelect, SelectProps as AntSelectProps } from 'antd';
-import FormController from '../FormController';
-import { FormInputProps } from './types';
+import FormController from '../../FormController';
+import { FormInputProps } from '../types';
 
 const { Option } = AntSelect;
 
@@ -14,10 +14,11 @@ interface SelectProps extends AntSelectProps, FormInputProps {
   options: SelectOption[];
 }
 
-const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<SelectProps> = ({
   name,
   label,
   options,
+  rules,
   required = false,
   ...props
 }) => {
@@ -25,6 +26,7 @@ const Select: React.FC<SelectProps> = ({
     <FormController
       name={name}
       label={label}
+      rules={rules}
       required={required}
       render={({ field, isInvalid }) => (
         <AntSelect {...field} {...props} status={isInvalid ? 'error' : ''}>
@@ -38,5 +40,3 @@ const Select: React.FC<SelectProps> = ({
     />
   );
 };
-
-export default Select;

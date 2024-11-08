@@ -1,12 +1,13 @@
 import React from 'react';
 import { Input, InputProps } from 'antd';
-import FormController from '../FormController';
-import { FormInputProps } from './types';
+import FormController from '../../FormController';
+import { FormInputProps } from '../types';
 
-const Text: React.FC<InputProps & FormInputProps> = ({
+export const Text: React.FC<InputProps & FormInputProps> = ({
   name,
   label,
   required = false,
+  rules,
   ...props
 }) => {
   return (
@@ -14,11 +15,10 @@ const Text: React.FC<InputProps & FormInputProps> = ({
       name={name}
       label={label}
       required={required}
+      rules={rules}
       render={({ field, isInvalid }) => (
         <Input {...field} {...props} status={isInvalid ? 'error' : ''} />
       )}
     />
   );
 };
-
-export default Text;
