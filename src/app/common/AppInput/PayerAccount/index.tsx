@@ -1,10 +1,12 @@
 import { ValidateResult } from 'react-hook-form';
 import { useAppSelector } from 'store/configureStore';
-import { selectPayerAccounts } from 'app/components/PaymentForm/slice/selectors';
+import { selectPayerAccounts } from 'app/slice/selectors';
 import { Select } from 'app/common/Form/FormInput/Select';
+import { useCurrency } from 'hooks/useCurrency';
 
 export function PayerAccount() {
   const payerAccounts = useAppSelector(selectPayerAccounts);
+  const { formatCurrency } = useCurrency();
 
   const validate = (
     value: string
@@ -22,7 +24,7 @@ export function PayerAccount() {
       placeholder="Select payer account"
       options={payerAccounts.map((account) => ({
         value: account.id,
-        label: `${account.iban} (Balance: ${account.balance})`,
+        label: `${account.iban} (Balance: ${formatCurrency(account.balance)})`,
       }))}
       required
       rules={{

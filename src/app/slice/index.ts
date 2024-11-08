@@ -1,6 +1,7 @@
-import { createSlice, WithSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, WithSlice } from '@reduxjs/toolkit';
 import { rootReducer } from 'store/configureStore';
 import { AppState } from './types';
+import { Language } from 'types';
 
 export const initialState: AppState = {
   payerAccounts: [
@@ -20,12 +21,17 @@ export const initialState: AppState = {
       balance: -5.87,
     },
   ],
+  language: Language.EN,
 };
 
 const slice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    selectlanguage: (state, action: PayloadAction<Language>) => {
+      state.language = action.payload;
+    },
+  },
 });
 
 declare module 'store/types' {
@@ -34,7 +40,7 @@ declare module 'store/types' {
 
 slice.injectInto(rootReducer);
 
-export const { actions: themeAction } = slice;
+export const { actions: appActions } = slice;
 
 export const useThemeSlice = () => {
   return { actions: slice.actions };

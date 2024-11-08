@@ -10,6 +10,11 @@ export const selectPayerAccounts = createSelector(
   (state) => state.payerAccounts
 );
 
+export const selectLanguage = createSelector(
+  [selectApp],
+  (state) => state.language
+);
+
 export const selectBalanceByAccountId = (id: string | undefined) =>
   createSelector([selectApp], (state) => {
     if (!id) {

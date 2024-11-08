@@ -1,7 +1,7 @@
 import { Number } from 'app/common/Form/FormInput/Number';
 import { useWatch, ValidateResult } from 'react-hook-form';
 import { useAppSelector } from 'store/configureStore';
-import { selectBalanceByAccountId } from 'app/components/PaymentForm/slice/selectors';
+import { selectBalanceByAccountId } from 'app/slice/selectors';
 
 export function Amount() {
   const payerAccount = useWatch({ name: 'payerAccount' }) as string | undefined;

@@ -3,3 +3,8 @@ export interface PayerAccounts {
   iban: string;
   balance: number;
 }
+
+export enum Language {
+  EN = 'en',
+  LT = 'lt',
+}
