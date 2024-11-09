@@ -47,6 +47,14 @@ const slice = createSlice({
 
       if (payerAccount) {
         payerAccount.balance -= action.payload.amount;
+
+        const payeeAccount = state.payerAccounts.find(
+          (account) => account.iban === action.payload.payeeAccount
+        );
+
+        if (payeeAccount) {
+          payeeAccount.balance += action.payload.amount;
+        }
       }
     },
     resetError: (state) => {
